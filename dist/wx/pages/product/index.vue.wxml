@@ -27,7 +27,7 @@
       </view>
       <view class="_div data-v-4bd5c284 filter-item" bindtap="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}"><text class="_text data-v-4bd5c284">排序</text> <text class="_text data-v-4bd5c284 iconfont icon-sort"></text></view>
     </view>
-    <view class="_div data-v-4bd5c284 product-list"><template wx:key="index" data="{{...$root[$kk+'6-'+index], $root}}" is="d73acd44" wx:for="{{productList}}" wx:for-index="index" wx:for-item="item"></template>
+    <view class="_div data-v-4bd5c284 product-list"><template wx:key="index" data="{{...$root[$kk+'6_'+index], $root}}" is="d73acd44" wx:for="{{productList}}" wx:for-index="index" wx:for-item="item"></template>
       <view class="_div data-v-4bd5c284 empty" hidden="{{!(productList.length === 0)}}"> 暂无数据~ </view>
       <view class="_div data-v-4bd5c284 continue" wx:if="{{continueLoadVisible}}"><button loading="{{isLoading}}" bindtap="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}" class="_button data-v-4bd5c284">加载更多</button></view>
     </view>

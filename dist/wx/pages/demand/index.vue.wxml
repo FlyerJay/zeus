@@ -1,7 +1,7 @@
 <template name="6ef780d5">
   <view class="_div data-v-46f0f32c page demand">
     <view class="_div data-v-46f0f32c list" wx:if="{{demandList.length > 0}}">
-      <view class="_div data-v-46f0f32c item" wx:key="index" key="{{index}}" wx:for="{{demandList}}" wx:for-index="index" wx:for-item="item"><text class="_text data-v-46f0f32c">{{ item.type }}</text> <text class="_text data-v-46f0f32c">{{ item.spec }}</text> <text class="_text data-v-46f0f32c">{{ item.long }}</text> <text class="_text data-v-46f0f32c">{{ item.amount + item.unit }}</text> <text class="_text data-v-46f0f32c">{{ item.weight }}吨</text> <text class="_text data-v-46f0f32c iconfont icon-minus" bindtap="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}"></text></view>
+      <view class="_div data-v-46f0f32c item" wx:key="index" key="{{index}}" wx:for="{{demandList}}" wx:for-index="index" wx:for-item="item"><text class="_text data-v-46f0f32c">{{ item.type }}</text> <text class="_text data-v-46f0f32c">{{ item.spec }}</text> <text class="_text data-v-46f0f32c">{{ item.long }}</text> <text class="_text data-v-46f0f32c">{{ item.amount + item.unit }}</text> <text class="_text data-v-46f0f32c">{{ item.weight }}吨</text> <text class="_text data-v-46f0f32c iconfont icon-minus" bindtap="handleProxy" data-eventid="{{'0_'+index}}" data-comkey="{{$k}}"></text></view>
     </view>
     <view class="_div data-v-46f0f32c create-from" wx:if="{{!createMode}}">
       <view class="_div data-v-46f0f32c form-item">

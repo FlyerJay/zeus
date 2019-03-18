@@ -137,6 +137,14 @@ try {
   global.Page = global.Page || Page;
   global.Component = global.Component || Component;
   global.getApp = global.getApp || getApp;
+
+  if (typeof wx !== 'undefined') {
+    global.mpvue = wx;
+    global.mpvuePlatform = 'wx';
+  } else if (typeof swan !== 'undefined') {
+    global.mpvue = swan;
+    global.mpvuePlatform = 'swan';
+  }
 } catch (e) {}
 
 (function (global, factory) {
@@ -977,8 +985,6 @@ function observe (value, asRootData, key) {
     !value._isVue
   ) {
     ob = new Observer(value, key);
-    ob.__keyPath = ob.__keyPath ? ob.__keyPath : {};
-    ob.__keyPath[key] = true;
   }
   if (asRootData && ob) {
     ob.vmCount++;
@@ -1042,8 +1048,15 @@ function defineReactive$$1 (
       }
       childOb = !shallow && observe(newVal, undefined, key);
       dep.notify();
-      obj.__keyPath = obj.__keyPath ? obj.__keyPath : {};
+
+      if (!obj.__keyPath) {
+        def(obj, '__keyPath', {}, false);
+      }
       obj.__keyPath[key] = true;
+      if (newVal instanceof Object && !(newVal instanceof Array)) {
+        // 标记是否是通过this.Obj = {} 赋值印发的改动，解决少更新问题#1305
+        def(newVal, '__newReference', true, false);
+      }
     }
   });
 }
@@ -1078,7 +1091,7 @@ function set (target, key, val) {
   defineReactive$$1(ob.value, key, val);
   // Vue.set 添加对象属性，渲染时候把 val 传给小程序渲染
   if (!target.__keyPath) {
-    target.__keyPath = {};
+    def(target, '__keyPath', {}, false);
   }
   target.__keyPath[key] = true;
   ob.dep.notify();
@@ -1109,7 +1122,7 @@ function del (target, key) {
     return
   }
   if (!target.__keyPath) {
-    target.__keyPath = {};
+    def(target, '__keyPath', {}, false);
   }
   // Vue.del 删除对象属性，渲染时候把这个属性设置为 undefined
   target.__keyPath[key] = 'del';
@@ -4294,7 +4307,7 @@ Object.defineProperty(Vue$3.prototype, '$ssrContext', {
 });
 
 Vue$3.version = '2.4.1';
-Vue$3.mpvueVersion = '1.0.18';
+Vue$3.mpvueVersion = '1.4.2';
 
 /* globals renderer */
 
@@ -5508,7 +5521,7 @@ function minifyDeepData (rootKey, originKey, vmData, data, _mpValueSet, vm) {
     } else {
       // Object
       var _keyPathOnThis = {}; // 存储这层对象的keyPath
-      if (vmData.__keyPath) {
+      if (vmData.__keyPath && !vmData.__newReference) {
         // 有更新列表 ，按照更新列表更新
         _keyPathOnThis = vmData.__keyPath;
         Object.keys(vmData).forEach(function (_key) {
@@ -5536,6 +5549,8 @@ function minifyDeepData (rootKey, originKey, vmData, data, _mpValueSet, vm) {
         // 没有更新列表
         compareAndSetDeepData(rootKey + '.' + originKey, vmData, vm, data);
       }
+      // 标记是否是通过this.Obj = {} 赋值印发的改动，解决少更新问题#1305
+      vmData.__newReference = false;
     }
   } catch (e) {
     console.log(e, rootKey, originKey, vmData, data);
@@ -5576,7 +5591,6 @@ function diffData (vm, data) {
     Object.keys(vmData).forEach(function (vmDataItemKey) {
       if (vmData[vmDataItemKey] instanceof Object) {
         // 引用类型
-        if (vmDataItemKey === '__keyPath') { return }
         minifyDeepData(rootKey, vmDataItemKey, vmData[vmDataItemKey], data, vm._mpValueSet, vm);
       } else if (vmData[vmDataItemKey] !== undefined) {
         // _data上的值属性只有要更新的时候才赋值
@@ -5589,7 +5603,6 @@ function diffData (vm, data) {
     Object.keys(vmProps).forEach(function (vmPropsItemKey) {
       if (vmProps[vmPropsItemKey] instanceof Object) {
         // 引用类型
-        if (vmPropsItemKey === '__keyPath') { return }
         minifyDeepData(rootKey, vmPropsItemKey, vmProps[vmPropsItemKey], data, vm._mpValueSet, vm);
       } else if (vmProps[vmPropsItemKey] !== undefined) {
         data[rootKey + '.' + vmPropsItemKey] = vmProps[vmPropsItemKey];
@@ -5640,6 +5653,8 @@ function diffData (vm, data) {
 //   }
 // }
 
+var KEY_SEP = '_';
+
 function getVmData (vm) {
   // 确保当前 vm 所有数据被同步
   var dataKeys = [].concat(
@@ -5668,12 +5683,12 @@ function getParentComKey (vm, res) {
 }
 
 function formatVmData (vm) {
-  var $p = getParentComKey(vm).join(',');
-  var $k = $p + ($p ? ',' : '') + getComKey(vm);
+  var $p = getParentComKey(vm).join(KEY_SEP);
+  var $k = $p + ($p ? KEY_SEP : '') + getComKey(vm);
 
   // getVmData 这儿获取当前组件内的所有数据，包含 props、computed 的数据
   // 改动 vue.runtime 所获的的核心能力
-  var data = Object.assign(getVmData(vm), { $k: $k, $kk: ($k + ","), $p: $p });
+  var data = Object.assign(getVmData(vm), { $k: $k, $kk: ("" + $k + KEY_SEP), $p: $p });
   var key = '$root.' + $k;
   var res = {};
   res[key] = data;
@@ -5785,12 +5800,20 @@ function getVM (vm, comkeys) {
   var keys = comkeys.slice(1);
   if (!keys.length) { return vm }
 
+  // bugfix #1375: 虚拟dom的compid和真实dom的comkey在组件嵌套时匹配出错，comid会丢失前缀，需要从父节点补充
+  var comkey = keys.join(KEY_SEP$1);
+  var comidPrefix = '';
   return keys.reduce(function (res, key) {
     var len = res.$children.length;
     for (var i = 0; i < len; i++) {
       var v = res.$children[i];
       var k = getComKey(v);
-      if (k === key) {
+      if (comidPrefix) {
+        k = comidPrefix + KEY_SEP$1 + k;
+      }
+      // 找到匹配的父节点
+      if (comkey.indexOf(k) === 0) {
+        comidPrefix = k;
         res = v;
         return res
       }
@@ -5873,6 +5896,8 @@ function getWebEventByMP (e) {
   return event
 }
 
+
+var KEY_SEP$1 = '_';
 function handleProxyWithVue (e) {
   var rootVueVM = this.$root;
   var type = e.type;
@@ -5882,7 +5907,7 @@ function handleProxyWithVue (e) {
   var dataset = ref.dataset; if ( dataset === void 0 ) dataset = {};
   var comkey = dataset.comkey; if ( comkey === void 0 ) comkey = '';
   var eventid = dataset.eventid;
-  var vm = getVM(rootVueVM, comkey.split(','));
+  var vm = getVM(rootVueVM, comkey.split(KEY_SEP$1));
 
   if (!vm) {
     return
@@ -6037,7 +6062,7 @@ function request(options) {
 /* 5 */
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.6.3' };
+var core = module.exports = { version: '2.6.5' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -6880,7 +6905,7 @@ module.exports = function (exec, skipClosing) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_demand_item_vue__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_6b62678f_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_demand_item_vue__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_6b62678f_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_demand_item_vue__ = __webpack_require__(105);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -6899,7 +6924,7 @@ var __vue_scopeId__ = "data-v-6b62678f"
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_demand_item_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_6b62678f_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_demand_item_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_6b62678f_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_demand_item_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
@@ -6933,7 +6958,7 @@ if (false) {(function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_dialog_vue__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_66c7007e_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_dialog_vue__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_66c7007e_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_dialog_vue__ = __webpack_require__(104);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -6952,7 +6977,7 @@ var __vue_scopeId__ = "data-v-66c7007e"
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_dialog_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_66c7007e_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_dialog_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_66c7007e_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_dialog_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__

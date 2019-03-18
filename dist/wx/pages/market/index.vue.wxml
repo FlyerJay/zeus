@@ -34,7 +34,7 @@
         </picker>
       </view>
     </view>
-    <view class="_div data-v-ddb8b846 market-list"><template wx:key="index" data="{{...$root[$kk+'8-'+index], $root}}" is="e8182432" wx:for="{{marketList}}" wx:for-index="index" wx:for-item="item"></template>
+    <view class="_div data-v-ddb8b846 market-list"><template wx:key="index" data="{{...$root[$kk+'8_'+index], $root}}" is="e8182432" wx:for="{{marketList}}" wx:for-index="index" wx:for-item="item"></template>
       <view class="_div data-v-ddb8b846 continue" wx:if="{{continueLoadVisible}}"><button loading="{{isLoading}}" bindtap="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}" class="_button data-v-ddb8b846">加载更多</button></view>
     </view>
   </view>

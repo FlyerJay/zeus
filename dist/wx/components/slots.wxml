@@ -1,11 +1,12 @@
 <import src="/components/message-notify.vue.wxml" />
 <import src="/components/demand-item.vue.wxml" />
 <import src="/components/card.vue.wxml" />
+<import src="/components/product-item.vue.wxml" />
 <import src="/components/dialog.vue.wxml" />
 <import src="/components/demand-item.vue.wxml" />
 <import src="/components/market-item.vue.wxml" />
-<import src="/components/product-item.vue.wxml" />
-<import src="/components/dialog.vue.wxml" /><template name="data-v-7dcd2396-default-6">
+<import src="/components/dialog.vue.wxml" />
+<template name="data-v-7dcd2396-default-6">
   <view class="_div data-v-7dcd2396 dialog-content">
     <view class="_div data-v-7dcd2396 input-control"><label for="demandUser" class="_label data-v-7dcd2396">销售</label> <input type="text" value="{{query.demandUser}}" bindinput="handleProxy" name="demandUser" maxlength="5" data-eventid="{{'3'}}" data-comkey="{{$k}}" class="_input data-v-7dcd2396" /></view>
     <view class="_div data-v-7dcd2396 toolbar"><button size="mini" bindtap="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}" class="_button data-v-7dcd2396">取消</button> <button size="mini" type="primary" bindtap="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}" class="_button data-v-7dcd2396">确定</button></view>

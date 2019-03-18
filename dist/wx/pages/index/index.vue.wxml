@@ -21,6 +21,6 @@
       </view>
     </view> <template wx:if="{{messageList.length > 0}}" data="{{...$root[$kk+'1'], $root}}" is="e4ecd088"></template>
     <view class="_div data-v-5fd5e527 demand-list-title"><text class="_text data-v-5fd5e527">定制需求列表</text> <text class="_text data-v-5fd5e527 view-more" bindtap="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}">查看更多<text class="_text data-v-5fd5e527 iconfont icon-arrow"></text></text></view>
-    <scroll-view class="_scroll-view data-v-5fd5e527 demand-list" scroll-y enable-back-to-top><template wx:key="index" data="{{...$root[$kk+'2-'+index], $root}}" is="26b00e90" wx:for="{{demandList}}" wx:for-index="index" wx:for-item="item"></template></scroll-view>
+    <scroll-view class="_scroll-view data-v-5fd5e527 demand-list" scroll-y enable-back-to-top><template wx:key="index" data="{{...$root[$kk+'2_'+index], $root}}" is="26b00e90" wx:for="{{demandList}}" wx:for-index="index" wx:for-item="item"></template></scroll-view>
   </view>
 </template>

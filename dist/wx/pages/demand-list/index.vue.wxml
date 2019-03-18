@@ -27,7 +27,7 @@
         <block wx:else><text class="_text data-v-7dcd2396">客户名称</text></block> <text class="_text data-v-7dcd2396 iconfont icon-select"></text>
       </view> <template bindclickMask="handleProxy" data-eventid="{{'11'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'9'], $root, $for:{default:'data-v-7dcd2396-default-9'},$slotdefault:'data-v-7dcd2396-default-9'}}" is="705399b5"></template>
     </view>
-    <view class="_div data-v-7dcd2396 list-container"><template wx:key="index" data="{{...$root[$kk+'10-'+index], $root}}" is="26b00e90" wx:for="{{demandList}}" wx:for-index="index" wx:for-item="item"></template>
+    <view class="_div data-v-7dcd2396 list-container"><template wx:key="index" data="{{...$root[$kk+'10_'+index], $root}}" is="26b00e90" wx:for="{{demandList}}" wx:for-index="index" wx:for-item="item"></template>
       <view class="_div data-v-7dcd2396 continue" wx:if="{{continueLoadVisible}}"><button loading="{{isLoading}}" bindtap="handleProxy" data-eventid="{{'12'}}" data-comkey="{{$k}}" class="_button data-v-7dcd2396">加载更多</button></view>
     </view>
   </view>
