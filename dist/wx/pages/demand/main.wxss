@@ -1,0 +1,112 @@
+@import "../../common/vendor.wxss";
+
+.list.data-v-46f0f32c {
+  padding: 10rpx 20rpx;
+  margin: 20rpx 30rpx;
+  background-color: #e8eaec;
+}
+.list .item.data-v-46f0f32c {
+  font-size: 32rpx;
+  color: #666;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.list .item text.data-v-46f0f32c {
+  margin-right: 20rpx;
+}
+.list .item .iconfont.data-v-46f0f32c {
+  float: right;
+  color: #ed4014;
+  margin-right: 0;
+}
+.create-demand.data-v-46f0f32c {
+  padding: 0 30rpx;
+  margin-top: 30rpx;
+}
+.create-demand ._button.data-v-46f0f32c {
+  font-size: 32rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+.create-demand ._button + ._button.data-v-46f0f32c {
+  margin-top: 10rpx;
+}
+.create-demand .iconfont.data-v-46f0f32c {
+  font-size: 36rpx;
+  margin-left: 10rpx;
+}
+.supplement-form.data-v-46f0f32c {
+  margin-top: 30rpx;
+}
+.form-item.data-v-46f0f32c {
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: 0 30rpx;
+  border-bottom: 2rpx solid #ddd;
+  font-size: 32rpx;
+  position: relative;
+}
+.form-item ._label.data-v-46f0f32c {
+  color: #666;
+  float: left;
+}
+.form-item ._input.data-v-46f0f32c {
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: right;
+  padding-right: 30rpx;
+}
+.form-item ._input.inner-input.data-v-46f0f32c {
+  margin-right: 60rpx;
+  padding-right: 10rpx;
+}
+.form-item .text-value.data-v-46f0f32c {
+  float: right;
+  padding-right: 30rpx;
+}
+.picker.data-v-46f0f32c {
+  font-size: 32rpx;
+  position: relative;
+}
+.picker .label.data-v-46f0f32c {
+  color: #666;
+}
+.picker .value.data-v-46f0f32c {
+  float: right;
+  padding-right: 30rpx;
+  color: #333;
+}
+.picker .iconfont.data-v-46f0f32c {
+  position: absolute;
+  right: 0;
+  color: #999;
+}
+.inner-picker.data-v-46f0f32c {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 60rpx;
+  font-size: 32rpx;
+}
+.inner-picker .value.data-v-46f0f32c {
+  float: right;
+  padding-right: 30rpx;
+  color: #333;
+}
+.inner-picker .iconfont.data-v-46f0f32c {
+  position: absolute;
+  right: 0;
+  color: #999;
+}
+.submit-button-group.data-v-46f0f32c {
+  margin: 0 30rpx;
+  margin-top: 60rpx;
+}
+.submit-button-group ._button.data-v-46f0f32c {
+  margin: auto 0;
+  padding: 0 80rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+}

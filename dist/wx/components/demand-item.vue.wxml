@@ -1,0 +1,16 @@
+<import src="/components/dialog.vue.wxml" /><template name="26b00e90">
+  <view class="_div data-v-6b62678f demand-item">
+    <view class="_div data-v-6b62678f title"><text class="_text data-v-6b62678f demand-no">{{ data.demandNo }}</text> <text class="_text data-v-6b62678f demand-state {{classFormat}}">({{ stateFormat }})：</text> <text class="_text data-v-6b62678f demand-tips">(报价有效期为半天，提供全款锁价服务，以款到时间为准；重量为理算重量，以实际过磅为准，直发需满30吨)</text></view>
+    <view class="_div data-v-6b62678f demand-detail">
+      <view class="_div data-v-6b62678f demand-line"><text class="_text data-v-6b62678f detail-label">创建时间</text> <text class="_text data-v-6b62678f detail-value">{{ createTimeFormat }}</text></view>
+      <view class="_div data-v-6b62678f demand-line" wx:if="{{data.priceTime}}"><text class="_text data-v-6b62678f detail-label">报价时间</text> <text class="_text data-v-6b62678f detail-value">{{ priceTimeFormat }}</text></view>
+      <view class="_div data-v-6b62678f demand-line" wx:if="{{data.feedbackTime}}"><text class="_text data-v-6b62678f detail-label">反馈时间</text> <text class="_text data-v-6b62678f detail-value">{{ feedbackTimeFormat }}</text></view>
+      <view class="_div data-v-6b62678f demand-line"><text class="_text data-v-6b62678f detail-label">销售</text> <text class="_text data-v-6b62678f detail-value">{{ data.userId }}</text></view>
+      <view class="_div data-v-6b62678f demand-line" wx:if="{{data.customerName}}"><text class="_text data-v-6b62678f detail-label">客户</text> <text class="_text data-v-6b62678f detail-value">{{ data.customerName }}</text></view>
+      <view class="_div data-v-6b62678f demand-line"><text class="_text data-v-6b62678f detail-label">采购</text> <text class="_text data-v-6b62678f detail-value">{{ data.priceUser }}</text></view>
+      <view class="_div data-v-6b62678f demand-line" wx:if="{{data.demandWeight}}"><text class="_text data-v-6b62678f detail-label">总重量</text> <text class="_text data-v-6b62678f detail-value">{{ data.demandWeight }}吨</text></view>
+      <view class="_div data-v-6b62678f demand-line" wx:if="{{data.comment}}"><text class="_text data-v-6b62678f detail-label">备注</text> <text class="_text data-v-6b62678f detail-value comment">{{ data.comment }}</text></view>
+      <view class="_div data-v-6b62678f demand-line"><text class="_text data-v-6b62678f detail-label">需求详情</text> <text class="_text data-v-6b62678f detail-value detail" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">查看详情</text></view>
+    </view> <template bindclickMask="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root, $for:{default:'data-v-6b62678f-default-0'},$slotdefault:'data-v-6b62678f-default-0'}}" is="705399b5"></template>
+  </view>
+</template>

@@ -1,0 +1,60 @@
+.form-item {
+    height: 40px;
+    line-height: 40px;
+    margin: 0 15px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    position: relative;
+
+    label {
+        color: #666;
+        float: left;
+        
+    }
+
+    input {
+        height: 40px;
+        line-height: 40px;
+        text-align: right;
+        padding-right: 15px;
+
+        &.inner-input {
+            margin-right: 30px;
+            padding-right: 5px
+        }
+    }
+
+    .text-value {
+        float: right;
+        padding-right: 15px;
+    }
+}
+
+.picker {
+    font-size: 16px;
+    position: relative;
+
+    .label {
+        color: #666;
+    }
+    
+    .value {
+        float: right;
+        padding-right: 15px;
+        color: #333;
+    }
+
+    .iconfont {
+        position: absolute;
+        right: 0;
+        color: #999;
+    }
+}
+
+.clearfix:before,.clearfix:after {
+    clear: both;
+    visibility: hidden;
+    content: "";
+    display: block;
+    height: 0;
+}

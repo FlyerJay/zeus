@@ -1,0 +1,6 @@
+<import src="/components/slots" /><template name="705399b5">
+  <view class="_div data-v-66c7007e dialog-container" wx:if="{{visible}}"><template nam="content" name="default"></template>
+    <view class="_div data-v-66c7007e dialog"><template nam="content" data="{{...$root[$p], ...$root[$k], $root}}" is="{{$slotdefault || 'default'}}"></template></view>
+    <view bindtap="handleProxy" class="_div data-v-66c7007e dialog-mask" hidden="{{!(mask)}}" data-eventid="{{'0'}}" data-comkey="{{$k}}"></view>
+  </view>
+</template>

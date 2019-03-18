@@ -1,0 +1,34 @@
+<import src="/components/dialog.vue.wxml" />
+<import src="/components/demand-item.vue.wxml" /><template name="6886022c">
+  <view class="_div data-v-7dcd2396 demand-list page">
+    <view class="_div data-v-7dcd2396 demand-filter">
+      <view class="_div data-v-7dcd2396 filter-item">
+        <picker bindchange="handleProxy" range="{{specList}}" mode="multiSelector" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_picker data-v-7dcd2396">
+          <view class="_div data-v-7dcd2396 filter-picker">
+            <block wx:if="{{query.spec}}"><text class="_text data-v-7dcd2396">{{ query.spec }}</text></block>
+            <block wx:else><text class="_text data-v-7dcd2396">规格</text></block> <text class="_text data-v-7dcd2396 iconfont icon-select"></text>
+          </view>
+        </picker>
+      </view>
+      <view class="_div data-v-7dcd2396 filter-item">
+        <picker bindchange="handleProxy" range="{{stateList}}" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_picker data-v-7dcd2396">
+          <view class="_div data-v-7dcd2396 filter-picker">
+            <block wx:if="{{query.stateStr}}"><text class="_text data-v-7dcd2396">{{ query.stateStr }}</text></block>
+            <block wx:else><text class="_text data-v-7dcd2396">状态</text></block> <text class="_text data-v-7dcd2396 iconfont icon-select"></text>
+          </view>
+        </picker>
+      </view>
+      <view class="_div data-v-7dcd2396 filter-item" bindtap="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}">
+        <block wx:if="{{query.demandUser}}"><text class="_text data-v-7dcd2396">{{ query.demandUser }}</text></block>
+        <block wx:else><text class="_text data-v-7dcd2396">销售</text></block> <text class="_text data-v-7dcd2396 iconfont icon-select"></text>
+      </view> <template bindclickMask="handleProxy" data-eventid="{{'6'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'6'], $root, $for:{default:'data-v-7dcd2396-default-6'},$slotdefault:'data-v-7dcd2396-default-6'}}" is="705399b5"></template>
+      <view class="_div data-v-7dcd2396 filter-item" bindtap="handleProxy" data-eventid="{{'7'}}" data-comkey="{{$k}}">
+        <block wx:if="{{query.customName}}"><text class="_text data-v-7dcd2396">{{ query.customName }}</text></block>
+        <block wx:else><text class="_text data-v-7dcd2396">客户名称</text></block> <text class="_text data-v-7dcd2396 iconfont icon-select"></text>
+      </view> <template bindclickMask="handleProxy" data-eventid="{{'11'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'9'], $root, $for:{default:'data-v-7dcd2396-default-9'},$slotdefault:'data-v-7dcd2396-default-9'}}" is="705399b5"></template>
+    </view>
+    <view class="_div data-v-7dcd2396 list-container"><template wx:key="index" data="{{...$root[$kk+'10-'+index], $root}}" is="26b00e90" wx:for="{{demandList}}" wx:for-index="index" wx:for-item="item"></template>
+      <view class="_div data-v-7dcd2396 continue" wx:if="{{continueLoadVisible}}"><button loading="{{isLoading}}" bindtap="handleProxy" data-eventid="{{'12'}}" data-comkey="{{$k}}" class="_button data-v-7dcd2396">加载更多</button></view>
+    </view>
+  </view>
+</template>

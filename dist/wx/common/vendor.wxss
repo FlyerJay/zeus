@@ -1,0 +1,103 @@
+
+.demand-item.data-v-6b62678f {
+  padding: 0 30rpx;
+  padding-top: 20rpx;
+}
+.demand-item .title.data-v-6b62678f {
+  font-size: 28rpx;
+  color: #333;
+}
+.demand-item .title .demand-state.data-v-6b62678f {
+  color: #666;
+}
+.demand-item .title .demand-state.submit.data-v-6b62678f {
+  color: #5cadff;
+}
+.demand-item .title .demand-state.priced.data-v-6b62678f {
+  color: #ff9900;
+}
+.demand-item .title .demand-state.undeal.data-v-6b62678f {
+  color: #ed4014;
+}
+.demand-item .title .demand-state.deal.data-v-6b62678f {
+  color: #19be6b;
+}
+.demand-item .title .demand-tips.data-v-6b62678f {
+  color: #999;
+}
+.demand-item .demand-detail.data-v-6b62678f {
+  font-size: 24rpx;
+  border-top: 2rpx solid #ddd;
+  border-left: 2rpx solid #ddd;
+  margin-top: 10rpx;
+}
+.demand-item .demand-detail .demand-line.data-v-6b62678f {
+  border-bottom: 2rpx solid #ddd;
+  border-right: 2rpx solid #ddd;
+  background-color: #f7f7f7;
+}
+.demand-item .demand-detail .demand-line .detail-label.data-v-6b62678f {
+  padding: 4rpx 10rpx;
+  display: inline-block;
+  width: 140rpx;
+  border-right: 2rpx solid #ddd;
+  color: #666;
+}
+.demand-item .demand-detail .demand-line .detail-value.data-v-6b62678f {
+  padding: 4rpx 10rpx;
+}
+.demand-item .demand-detail .demand-line .comment.data-v-6b62678f {
+  color: #ed4014;
+}
+.demand-item .demand-detail .demand-line .detail.data-v-6b62678f {
+  text-decoration: underline;
+  color: #5cadff;
+}
+.demand-item .demand-detail .demand-line.data-v-6b62678f:nth-child(2n) {
+  background-color: #fff;
+}
+.demand-item .dialog-content.data-v-6b62678f {
+  width: 700rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  border: none;
+  max-height: 400rpx;
+  overflow: scroll;
+}
+.demand-item .dialog-content .demand-detail.data-v-6b62678f {
+  padding: 20rpx 30rpx;
+  border: none;
+}
+.demand-item .dialog-content .demand-detail .demand-detail-line.data-v-6b62678f {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.dialog-container.data-v-66c7007e {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  position: fixed;
+  z-index: 999;
+}
+.dialog-container .dialog.data-v-66c7007e {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 1001;
+}
+.dialog-container .dialog-mask.data-v-66c7007e {
+  position: fixed;
+  display: block;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  pointer-events: unset;
+}

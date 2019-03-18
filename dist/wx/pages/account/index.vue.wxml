@@ -1,0 +1,14 @@
+<template name="0601b1b9">
+  <view class="_div data-v-2d368a42 page bind">
+    <view class="_div data-v-2d368a42 bind-form" wx:if="{{bindMode}}">
+      <view class="_p data-v-2d368a42">第一次使用微信小程序登录，需要进行账号绑定，请您输入以下信息并提交绑定</view>
+      <view class="_div data-v-2d368a42 form-item"><label for class="_label data-v-2d368a42">账号</label> <input type="text" value="{{form.account}}" bindinput="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_input data-v-2d368a42" /></view>
+      <view class="_div data-v-2d368a42 form-item"><label for class="_label data-v-2d368a42">密码</label> <input type="password" value="{{form.password}}" bindinput="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_input data-v-2d368a42" /></view>
+      <view class="_div data-v-2d368a42 form-item">
+        <picker bindchange="handleProxy" range="{{companyList}}" data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_picker data-v-2d368a42">
+          <view class="_div data-v-2d368a42 picker"><text class="_text data-v-2d368a42 label">公司</text> <text class="_text data-v-2d368a42 value">{{ form.company }}</text> <text class="_text data-v-2d368a42 iconfont icon-arrow"></text></view>
+        </picker>
+      </view> <button class="_button data-v-2d368a42 btn" type="primary" disabled="{{isDisabled}}" open-type="getUserInfo" bindgetuserinfo="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}">绑定账号</button>
+    </view>
+  </view>
+</template>

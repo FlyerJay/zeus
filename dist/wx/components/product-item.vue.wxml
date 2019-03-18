@@ -1,0 +1,36 @@
+<template name="d73acd44">
+  <view class="_div data-v-2613f532 product-item">
+    <view class="_div data-v-2613f532 data-part">
+      <view class="_div data-v-2613f532 part spec">{{ specFormat }}</view>
+      <view class="_div data-v-2613f532 part">
+        <view class="_div data-v-2613f532 data-line clearfix">
+          <view class="_div data-v-2613f532 data lastupdate-time">{{ updateTimeFormat }}</view>
+          <view class="_div data-v-2613f532 data type">{{ data.type }}</view>
+          <view class="_div data-v-2613f532 data supplier">
+            <view class="_div data-v-2613f532 supplier-name">{{ data.supplierName }}</view>
+          </view>
+        </view>
+        <view class="_div data-v-2613f532 data-line clearfix">
+          <view class="_div data-v-2613f532 data price" wx:if="{{data.value}}"><text class="_text data-v-2613f532 iconfont icon-price"></text> <text class="_text data-v-2613f532">{{ data.value }}</text></view>
+          <view class="_div data-v-2613f532 data invalid" wx:else> 暂无 </view>
+          <view class="_div data-v-2613f532 data benifit"><text class="_text data-v-2613f532">{{ data.benifit }}</text>
+            <block wx:if="{{data.benifitAdjust > 0}}"><text class="_text data-v-2613f532 iconfont icon-drop"></text> <text class="_text data-v-2613f532 benifit-adjust drop">{{ benifitAdjustFormat }}</text></block>
+            <block wx:if="{{data.benifitAdjust < 0}}"><text class="_text data-v-2613f532 iconfont icon-rise"></text> <text class="_text data-v-2613f532 benifit-adjust rise">{{ benifitAdjustFormat }}</text></block>
+          </view>
+          <view class="_div data-v-2613f532 data pure-price" wx:if="{{data.purePrice}}"><text class="_text data-v-2613f532 iconfont icon-price"></text> <text class="_text data-v-2613f532">{{ data.purePrice }}</text></view>
+          <view class="_div data-v-2613f532 data invalid" wx:else> 暂无 </view>
+        </view>
+      </view>
+    </view>
+    <view class="_div data-v-2613f532 data-part">
+      <view class="_div data-v-2613f532 part long">{{ data.long }}米</view>
+      <view class="_div data-v-2613f532 part">
+        <view class="_div data-v-2613f532 data-line clearfix">
+          <view class="_div data-v-2613f532 data amount">{{ data.inventoryAmount }}件</view>
+          <view class="_div data-v-2613f532 data per">{{ data.perAmount }}支/件</view>
+          <view class="_div data-v-2613f532 data freight"><text class="_text data-v-2613f532 iconfont icon-transform"></text> <text class="_text data-v-2613f532">{{ data.freight }}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

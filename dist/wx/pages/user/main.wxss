@@ -1,0 +1,32 @@
+@import "../../common/vendor.wxss";
+
+.user .user-card.data-v-6d9783a8 {
+  height: 300rpx;
+  overflow: hidden;
+  position: relative;
+}
+.user .user-card .user-avatar.data-v-6d9783a8 {
+  text-align: center;
+  margin-top: 20rpx;
+  position: relative;
+  z-index: 10;
+}
+.user .user-card .user-avatar image.data-v-6d9783a8 {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 100rpx;
+}
+.user .user-card .user-bg.data-v-6d9783a8 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: 150%;
+  background-position: center center;
+  background-image: linear-gradient(270deg, #25D1D1 0%, #3BE6AD 100%);
+}
+.user .user-card .user-name.data-v-6d9783a8 {
+  font-size: 28rpx;
+  color: #fff;
+}

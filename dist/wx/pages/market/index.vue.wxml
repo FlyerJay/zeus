@@ -1,0 +1,41 @@
+<import src="/components/market-item.vue.wxml" /><template name="8dab9cf4">
+  <view class="_div data-v-ddb8b846 market page">
+    <view class="_div data-v-ddb8b846 market-filter">
+      <view class="_div data-v-ddb8b846 filter-item">
+        <picker bindchange="handleProxy" range="{{specList}}" mode="multiSelector" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_picker data-v-ddb8b846">
+          <view class="_div data-v-ddb8b846 filter-picker">
+            <block wx:if="{{query.spec}}"><text class="_text data-v-ddb8b846">{{ query.spec }}</text></block>
+            <block wx:else><text class="_text data-v-ddb8b846">规格</text></block> <text class="_text data-v-ddb8b846 iconfont icon-select"></text>
+          </view>
+        </picker>
+      </view>
+      <view class="_div data-v-ddb8b846 filter-item">
+        <picker bindchange="handleProxy" range="{{typeList}}" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_picker data-v-ddb8b846">
+          <view class="_div data-v-ddb8b846 filter-picker">
+            <block wx:if="{{query.type}}"><text class="_text data-v-ddb8b846">{{ query.type }}</text></block>
+            <block wx:else><text class="_text data-v-ddb8b846">类型</text></block> <text class="_text data-v-ddb8b846 iconfont icon-select"></text>
+          </view>
+        </picker>
+      </view>
+      <view class="_div data-v-ddb8b846 filter-item">
+        <picker bindchange="handleProxy" range="{{addressList}}" data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_picker data-v-ddb8b846">
+          <view class="_div data-v-ddb8b846 filter-picker">
+            <block wx:if="{{query.address}}"><text class="_text data-v-ddb8b846">{{ query.address }}</text></block>
+            <block wx:else><text class="_text data-v-ddb8b846">供应商所在地</text></block> <text class="_text data-v-ddb8b846 iconfont icon-select"></text>
+          </view>
+        </picker>
+      </view>
+      <view class="_div data-v-ddb8b846 filter-item">
+        <picker bindchange="handleProxy" range="{{supplierList}}" data-eventid="{{'3'}}" data-comkey="{{$k}}" class="_picker data-v-ddb8b846">
+          <view class="_div data-v-ddb8b846 filter-picker">
+            <block wx:if="{{query.supplierName}}"><text class="_text data-v-ddb8b846">{{ query.supplierName }}</text></block>
+            <block wx:else><text class="_text data-v-ddb8b846">供应商名称</text></block> <text class="_text data-v-ddb8b846 iconfont icon-select"></text>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="_div data-v-ddb8b846 market-list"><template wx:key="index" data="{{...$root[$kk+'8-'+index], $root}}" is="e8182432" wx:for="{{marketList}}" wx:for-index="index" wx:for-item="item"></template>
+      <view class="_div data-v-ddb8b846 continue" wx:if="{{continueLoadVisible}}"><button loading="{{isLoading}}" bindtap="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}" class="_button data-v-ddb8b846">加载更多</button></view>
+    </view>
+  </view>
+</template>

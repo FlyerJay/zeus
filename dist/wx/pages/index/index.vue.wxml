@@ -1,0 +1,26 @@
+<import src="/components/message-notify.vue.wxml" />
+<import src="/components/demand-item.vue.wxml" /><template name="69627e5e">
+  <view class="_div data-v-5fd5e527 page index">
+    <swiper indicator-dots="{{dots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" class="_swiper data-v-5fd5e527">
+      <swiper-item wx:key="index" key="{{index}}" wx:for="{{swiperItems}}" wx:for-index="index" wx:for-item="item" class="_swiper-item data-v-5fd5e527">
+        <image src="{{item.image}}" class="_image data-v-5fd5e527 banner-image"></image>
+      </swiper-item>
+    </swiper>
+    <view class="_div data-v-5fd5e527 menu">
+      <view class="_div data-v-5fd5e527 menu-item" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+        <view class="_i data-v-5fd5e527 iconfont icon-product"></view>
+        <view class="_p data-v-5fd5e527">现货查询</view>
+      </view>
+      <view class="_div data-v-5fd5e527 menu-item" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}">
+        <view class="_i data-v-5fd5e527 iconfont icon-demand"></view>
+        <view class="_p data-v-5fd5e527">定制需求</view>
+      </view>
+      <view class="_div data-v-5fd5e527 menu-item" bindtap="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}">
+        <view class="_i data-v-5fd5e527 iconfont icon-report"></view>
+        <view class="_p data-v-5fd5e527">行情信息</view>
+      </view>
+    </view> <template wx:if="{{messageList.length > 0}}" data="{{...$root[$kk+'1'], $root}}" is="e4ecd088"></template>
+    <view class="_div data-v-5fd5e527 demand-list-title"><text class="_text data-v-5fd5e527">定制需求列表</text> <text class="_text data-v-5fd5e527 view-more" bindtap="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}">查看更多<text class="_text data-v-5fd5e527 iconfont icon-arrow"></text></text></view>
+    <scroll-view class="_scroll-view data-v-5fd5e527 demand-list" scroll-y enable-back-to-top><template wx:key="index" data="{{...$root[$kk+'2-'+index], $root}}" is="26b00e90" wx:for="{{demandList}}" wx:for-index="index" wx:for-item="item"></template></scroll-view>
+  </view>
+</template>

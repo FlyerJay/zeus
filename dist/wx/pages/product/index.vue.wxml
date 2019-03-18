@@ -1,0 +1,43 @@
+<import src="/components/product-item.vue.wxml" /><template name="24a0e9fb">
+  <view class="_div data-v-4bd5c284 product page">
+    <view class="_div data-v-4bd5c284 product-filter">
+      <view class="_div data-v-4bd5c284 filter-item">
+        <picker bindchange="handleProxy" range="{{specList}}" mode="multiSelector" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_picker data-v-4bd5c284">
+          <view class="_div data-v-4bd5c284 filter-picker">
+            <block wx:if="{{query.spec}}"><text class="_text data-v-4bd5c284">{{ query.spec }}</text></block>
+            <block wx:else><text class="_text data-v-4bd5c284">规格</text></block> <text class="_text data-v-4bd5c284 iconfont icon-select"></text>
+          </view>
+        </picker>
+      </view>
+      <view class="_div data-v-4bd5c284 filter-item">
+        <picker bindchange="handleProxy" range="{{typeList}}" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_picker data-v-4bd5c284">
+          <view class="_div data-v-4bd5c284 filter-picker">
+            <block wx:if="{{query.type}}"><text class="_text data-v-4bd5c284">{{ query.type }}</text></block>
+            <block wx:else><text class="_text data-v-4bd5c284">类型</text></block> <text class="_text data-v-4bd5c284 iconfont icon-select"></text>
+          </view>
+        </picker>
+      </view>
+      <view class="_div data-v-4bd5c284 filter-item">
+        <picker bindchange="handleProxy" range="{{addressList}}" data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_picker data-v-4bd5c284">
+          <view class="_div data-v-4bd5c284 filter-picker">
+            <block wx:if="{{query.address}}"><text class="_text data-v-4bd5c284">{{ query.address }}</text></block>
+            <block wx:else><text class="_text data-v-4bd5c284">供应商所在地</text></block> <text class="_text data-v-4bd5c284 iconfont icon-select"></text>
+          </view>
+        </picker>
+      </view>
+      <view class="_div data-v-4bd5c284 filter-item" bindtap="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}"><text class="_text data-v-4bd5c284">排序</text> <text class="_text data-v-4bd5c284 iconfont icon-sort"></text></view>
+    </view>
+    <view class="_div data-v-4bd5c284 product-list"><template wx:key="index" data="{{...$root[$kk+'6-'+index], $root}}" is="d73acd44" wx:for="{{productList}}" wx:for-index="index" wx:for-item="item"></template>
+      <view class="_div data-v-4bd5c284 empty" hidden="{{!(productList.length === 0)}}"> 暂无数据~ </view>
+      <view class="_div data-v-4bd5c284 continue" wx:if="{{continueLoadVisible}}"><button loading="{{isLoading}}" bindtap="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}" class="_button data-v-4bd5c284">加载更多</button></view>
+    </view>
+    <view class="_div data-v-4bd5c284 sort" hidden="{{!(sortDialogVisible)}}">
+      <view class="_div data-v-4bd5c284 sort-method {{[!sortMethod ? 'selected' : '']}}" bindtap="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}"><text class="_text data-v-4bd5c284">默认排序</text></view>
+      <view class="_div data-v-4bd5c284 sort-method {{[sortMethod === 1 ? 'selected' : '']}}" bindtap="handleProxy" data-eventid="{{'6'}}" data-comkey="{{$k}}"><text class="_text data-v-4bd5c284">按出厂价由低到高</text> <text class="_text data-v-4bd5c284 iconfont icon-drop"></text></view>
+      <view class="_div data-v-4bd5c284 sort-method {{[sortMethod === 2 ? 'selected' : '']}}" bindtap="handleProxy" data-eventid="{{'7'}}" data-comkey="{{$k}}"><text class="_text data-v-4bd5c284">按出厂价由高到低</text> <text class="_text data-v-4bd5c284 iconfont icon-rise"></text></view>
+      <view class="_div data-v-4bd5c284 sort-method {{[sortMethod === 3 ? 'selected' : '']}}" bindtap="handleProxy" data-eventid="{{'8'}}" data-comkey="{{$k}}"><text class="_text data-v-4bd5c284">按开单价由低到高</text> <text class="_text data-v-4bd5c284 iconfont icon-drop"></text></view>
+      <view class="_div data-v-4bd5c284 sort-method {{[sortMethod === 4 ? 'selected' : '']}}" bindtap="handleProxy" data-eventid="{{'9'}}" data-comkey="{{$k}}"><text class="_text data-v-4bd5c284">按开单价由高到低</text> <text class="_text data-v-4bd5c284 iconfont icon-rise"></text></view>
+    </view>
+    <view class="_div data-v-4bd5c284 sort-mask" hidden="{{!(sortDialogVisible)}}" bindtap="handleProxy" data-eventid="{{'10'}}" data-comkey="{{$k}}"></view>
+  </view>
+</template>
