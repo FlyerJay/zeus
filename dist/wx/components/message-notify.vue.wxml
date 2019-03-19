@@ -1,5 +1,0 @@
-<template name="e4ecd088">
-  <view class="_div data-v-0ef22585 message-notify"><text class="_text data-v-0ef22585 iconfont icon-notify"></text>
-    <view class="_div data-v-0ef22585 notify-content"><text class="_text data-v-0ef22585 notify-text" animation="{{animationData}}">{{ notify.message || '重要通知' }}</text></view> <text class="_text data-v-0ef22585 notify-time">{{ timeFormat }}</text>
-  </view>
-</template>
