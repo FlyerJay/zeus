@@ -5,8 +5,8 @@
             <div class="filter-item">
                 <picker @change="changeSpec" :range="specList" mode="multiSelector">
                     <div class="filter-picker">
-                        <template v-if="query.spec">
-                            <text>{{ query.spec }}</text>
+                        <template v-if="showSpec">
+                            <text>{{ showSpec }}</text>
                         </template>
                         <template v-else>
                             <text>规格</text>
@@ -24,20 +24,6 @@
                         </template>
                         <template v-else>
                             <text>类型</text>
-                        </template>
-                        <text class="iconfont icon-select"></text>
-                    </div>
-                </picker>
-            </div>
-
-            <div class="filter-item">
-                <picker @change="changeAddress" :range="addressList">
-                    <div class="filter-picker">
-                        <template v-if="query.address">
-                            <text>{{ query.address }}</text>
-                        </template>
-                        <template v-else>
-                            <text>供应商所在地</text>
                         </template>
                         <text class="iconfont icon-select"></text>
                     </div>
@@ -98,6 +84,9 @@
     import productItem from '../../components/product-item'
     import { specList, typeList } from '../../utils/data'
 
+    specList.forEach(item => item.unshift('全部'))
+    typeList.unshift('全部')
+
     export default {
         name: 'product',
 
@@ -110,16 +99,15 @@
                 query: {
                     page: 1,
                     spec: '', // 规格
-                    type: '', // 类型
-                    address: '', // 供应商所在地
+                    type: '' // 类型
                 },
                 specList: specList,
                 typeList: typeList,
-                addressList: [],
                 sortMethod: '', // 排序方式
                 sortDialogVisible: false, // 排序窗口是否可见
                 continueLoadVisible: false, // 继续加载是否可见
-                isLoading: false
+                isLoading: false,
+                showSpec: ''
             }
         },
 
@@ -129,7 +117,6 @@
 
         mounted () {
             this.getProductList()
-            this.getAddressList()
         },
 
         watch: {
@@ -143,7 +130,7 @@
                 this.query.page = 1
                 wx.showLoading({ title: '数据加载中' })
                 return ajax({
-                    url: '/product/list',
+                    url: '/product/kx',
                     data: this.query
                 }).then(response => {
                     wx.hideLoading()
@@ -156,19 +143,6 @@
                 })
             },
 
-            getAddressList () {
-                ajax({
-                    url: '/supplier/address'
-                }).then(response => {
-                    if (response.code === 200) {
-                        this.addressList = response.data.map(item => {
-                            return item.address
-                        })
-                        this.addressList.unshift('全部')
-                    }
-                })
-            },
-
             changeSpec (e) {
                 var oldValue = this.query.spec
                 var specArray = []
@@ -178,7 +152,8 @@
                 if (spec1 !== '全部') specArray.push(spec1)
                 if (spec2 !== '全部') specArray.push(spec2)
                 if (spec3 !== '全部') specArray.push(spec3)
-                this.query.spec = specArray.join('*')
+                this.showSpec = specArray.join('*')
+                this.query.spec = `${spec1}*${spec2}*${spec3}`
 
                 if (oldValue !== this.query.spec) {
                     this.getProductList()
@@ -192,17 +167,6 @@
                     this.query.type = ''
                 }
                 if (oldValue !== this.query.type) {
-                    this.getProductList()
-                }
-            },
-
-            changeAddress (e) {
-                var oldValue = this.query.address
-                this.query.address = this.addressList[e.mp.detail.value]
-                if (this.query.address === '全部') {
-                    this.query.address = ''
-                }
-                if (oldValue !== this.query.address) {
                     this.getProductList()
                 }
             },
@@ -243,7 +207,7 @@
                 this.query.page++
                 this.isLoading = true
                 ajax({
-                    url: '/product/list',
+                    url: '/product/kx',
                     data: this.query
                 }).then(response => {
                     this.isLoading = false
@@ -260,11 +224,9 @@
                 this.isLoading = false
                 this.originList = []
                 this.productList = []
-                this.addressList = []
                 this.query.page = 1
                 this.query.spec = ''
                 this.query.type = ''
-                this.query.address = ''
                 this.sortMethod = ''
                 this.sortDialogVisible = false
                 this.continueLoadVisible = false
@@ -278,7 +240,6 @@
                 .then(() => {
                     wx.stopPullDownRefresh()
                 })
-            this.getAddressList()
         }
     }
 </script>

@@ -1,3 +1,4 @@
+import mtjwxsdk from './utils/mtj-wx-sdk'
 import Vue from 'vue'
 import App from './App'
 import '../static/weui/weui.css'
